@@ -1,63 +1,44 @@
-import { userData } from "../data/user-data.js";
-// import { connection } from "../mongo.js";
-
 import mongodb from "mongodb";
-const MongoClient = mongodb.MongoClient;
+import { User } from "../models/user-model.js";
 
-const url =
-  "mongodb+srv://Sachdev:Thegodfather%400@cluster0.elpqkkf.mongodb.net/Expense-Tracker?retryWrites=true&w=majority";
-
-const connection = new MongoClient(url);
-
-export const getUserDetails = (req, res, next) => {
-  const selectedUserAge = userData.find(
-    data => data.userName === req.params.user
-  );
-  // console.log("RESPONSE", selectedUserAge);
-  const error = new Error();
-  error.code = 400;
-  if (!selectedUserAge) return next({ error });
-  res.status(200).json({
-    name: selectedUserAge.userName,
-    age: selectedUserAge.age
-  });
-
-  //throw new Error("handled in a way!!")
-  //throw res.status(525).send("Error occured and handled!");
+export const getUserDetails = async (req, res, next) => {
+  const user = req.params.username;
+  const password = req.params.password;
+  console.log("user", user);
+  let result;
+  try {
+    result = await User.find({ userName: user, password: password });
+    console.log("Get request success!!");
+    if (result.length === 0)
+      return res
+        .status(400)
+        .json({ message: "No Data to display", status: false, data: result });
+  } catch (error) {
+    console.log("Get request failed!!");
+    res
+      .status(404)
+      .json({ message: "Get request failed!!", status: false, error: error });
+    // return next(error);
+  }
+  res
+    .status(200)
+    .json({ message: "Get request success!!", status: true, data: result });
 };
 
-export const addUserDetails = async (req, res, next) => {
-  const reqData = req.body;
-  console.log("hits controller");
+export const postUserDetails = async (req, res, next) => {
+  const userData = new User({
+    userName: req.body.userName,
+    age: req.body.age,
+    country: req.body.country,
+    state: req.body.state
+  });
+  let result;
   try {
-    await connection.connect();
-    console.log("DB CONNECTION SUCCESS!!");
-    const db = connection.db("Expense-Tracker");
-
-    await db.collection("user").insertOne(reqData);
+    result = await userData.save();
   } catch (error) {
     console.log("catch block");
     return res.status(500).json({ message: error });
   }
-  connection.close();
 
-  res.status(200).json({ message: "Data added to DB", data: reqData });
-};
-
-export const getAllUsers = async (req, res, next) => {
-  let usersData;
-  try {
-    await connection.connect();
-
-    const db = connection.db();
-    usersData = await db
-      .collection("user")
-      .find()
-      .toArray();
-  } catch (error) {
-    res.status(500).json({ message: "Could not retreive data!!", error });
-  }
-  connection.close();
-
-  res.status(200).json({ users: usersData });
+  res.status(200).json({ message: "Data added to DB", result });
 };
