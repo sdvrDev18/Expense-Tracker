@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigateTo = useNavigate();
   const [userName, setUsername] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState("");
@@ -24,7 +26,11 @@ const Login = () => {
       );
 
       const data = await response.json();
-      data.status ? setLoginStatus("success") : setLoginStatus("error");
+      if (data.status) {
+        navigateTo("/dashboard", { state: { data: data && data.data } });
+      } else {
+        setLoginStatus("error");
+      }
       console.log("data", data);
     } catch (err) {
       setLoginStatus("error");
@@ -48,7 +54,9 @@ const Login = () => {
         </div>
         <div className="login-button-container">
           <button onClick={getUserByName}>Login</button>
-          <button>Cancel</button>
+          <Link to="/">
+            <button>Cancel</button>
+          </Link>
         </div>
       </div>
       <Snackbar

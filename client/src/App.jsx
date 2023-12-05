@@ -1,16 +1,20 @@
 import { useState } from "react";
-import Login from "./components/user/login";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Home from "./components/home/home.jsx";
+import Login from "./components/user/login.jsx";
+import Dashboard from "./components/home/Dashboard.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
-      <div className="main-container">
-        <h1 className="main-heading">Expense Tracker</h1>
-        <Login />
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
