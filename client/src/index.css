@@ -61,6 +61,7 @@ html {
   margin: auto;
   align-items: center;
   position: relative;
+  border: 1px solid black;
 }
 
 .login-input-container {
@@ -162,4 +163,8 @@ html {
   right: 3.5em;
   position: relative;
   font-weight: 600;
+}
+
+.try-class {
+  background: red;
 }
