@@ -3,14 +3,18 @@ import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import { Link, useNavigate } from "react-router-dom";
 
+import { useSelector, useDispatch } from "react-redux";
+import { userdata } from "./loginSlice.jsx";
+
 const Login = () => {
+  const user = useSelector(state => state.login.value);
+  const dispatch = useDispatch();
   const navigateTo = useNavigate();
   const [userName, setUsername] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState("");
   const horizontal = "right";
   const vertical = "top";
-
   const getUserByName = async () => {
     try {
       const response = await fetch(
@@ -27,6 +31,7 @@ const Login = () => {
 
       const data = await response.json();
       if (data.status) {
+        data && dispatch(userdata(data.data));
         navigateTo("/dashboard/home", { state: { data: data && data.data } });
       } else {
         setLoginStatus("error");

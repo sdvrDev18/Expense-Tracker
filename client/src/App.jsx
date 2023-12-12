@@ -1,23 +1,18 @@
-import { useState } from "react";
 import {
   createBrowserRouter,
   Route,
   createRoutesFromElements,
-  RouterProvider,
-  useLocation
+  RouterProvider
 } from "react-router-dom";
 import Login from "./components/user/login.jsx";
 import LoginOptions from "./components/user/loginOptions.jsx";
 import Header from "./components/wrapper/header.jsx";
 import Dashboard from "./components/wrapper/dashboard.jsx";
-import Home from "./components/containers/home.jsx";
-import Expense from "./components/containers/expense.jsx";
-import Income from "./components/containers/income.jsx";
+import Home from "./components/home/home.jsx";
+import Expense from "./components/expense/expense.jsx";
+import Income from "./components/income/income.jsx";
 
 function App() {
-  // const [isSideBar, setSideBar] = useState(false);
-  // let location = useLocation();
-  // console.log("location", location);
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
