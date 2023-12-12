@@ -6,6 +6,19 @@ html {
   height: 100%;
 }
 
+input {
+  border: none;
+  background: #d3d3d373;
+  padding: 3%;
+  border-radius: 5px;
+  outline-color: #7788996b;
+  box-shadow: 0 0 1px;
+}
+
+ul {
+  list-style-type: none;
+}
+
 .main-container {
   height: 100vh;
   width: 100%;
@@ -52,16 +65,34 @@ html {
   align-self: center;
 }
 
+.footer-container {
+  display: flex;
+  height: 4em;
+  width: 100%;
+  background: #011638;
+}
+
 .login-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 20em;
-  width: 30em;
+  height: 25em;
+  width: 40em;
   margin: auto;
   align-items: center;
   position: relative;
-  border: 1px solid black;
+  overflow: auto;
+  border-radius: 10px;
+  background: #d5cfe14a;
+  box-shadow: 0 0 5px;
+  font-family: monospace;
+}
+
+.login-container h2 {
+  color: #b8c0ff;
+  position: relative;
+  font-weight: 600;
+  font-size: 20px;
 }
 
 .login-input-container {
@@ -69,6 +100,11 @@ html {
   justify-content: space-around;
   flex-direction: row;
   width: inherit;
+}
+
+.login-input-container label {
+  color: #b4a0e5;
+  align-self: center;
 }
 
 .login-button-container {
@@ -81,6 +117,7 @@ html {
 .login-options-container {
   display: flex;
   flex-direction: column;
+  overflow: auto;
   height: 40vh;
   width: 40vw;
   justify-content: space-evenly;
@@ -96,11 +133,9 @@ html {
 }
 
 .login-route-button {
-  font-size: 3em;
+  overflow: hidden;
   text-align: center;
   text-decoration: none;
-  height: 1.2em;
-  width: 3.5em;
   border-radius: 5px;
   background: #b4a0e5;
   color: #ffd79b;
@@ -110,8 +145,20 @@ html {
   justify-content: space-evenly;
 }
 
+.login-route-button-size-large {
+  font-size: 3em;
+  height: 1.2em;
+  width: 3.5em;
+}
+
+.login-route-button-size-small {
+  font-size: 1em;
+  height: 2em;
+  width: 6em;
+}
+
 .login-route-button-description {
-  font-size: 30px;
+  font-size: 1em;
   align-self: center;
   margin: auto;
   font-family: monospace;
@@ -128,14 +175,15 @@ html {
 }
 
 .signin-route-button:hover,
-.login-route-button:hover {
+.login-route-button:hover,
+.cancel-button:hover {
   transition: all 0.6s ease-out;
   background: #011638;
   color: whitesmoke;
 }
 
 .signin-route-button {
-  color: black;
+  overflow: hidden;
   font-size: 1em;
   text-align: center;
   text-decoration: none;
@@ -165,6 +213,42 @@ html {
   font-weight: 600;
 }
 
-.try-class {
-  background: red;
+.cancel-button {
+  overflow: hidden;
+  font-size: 1em;
+  text-align: center;
+  text-decoration: none;
+  height: 2em;
+  width: 6em;
+  border-radius: 5px;
+  background: #49475b;
+  color: #ffd79b;
+  box-shadow: 0 0 3px;
+  display: flex;
+}
+
+.cancel-button-description {
+  font-size: 1em;
+  align-self: center;
+  margin: auto;
+  font-family: monospace;
+}
+
+/* Used grid layout to create separation between sidebar and contents area */
+
+.grid-col-app-wrapper {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  background: grey;
+  height: calc(100vh - 9em);
+}
+
+.grid-sidebar-container {
+  border: 1px solid red;
+  grid-column: span 1;
+}
+
+.grid-content-container {
+  grid-column: span 3;
 }

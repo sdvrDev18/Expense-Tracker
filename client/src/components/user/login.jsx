@@ -27,7 +27,7 @@ const Login = () => {
 
       const data = await response.json();
       if (data.status) {
-        navigateTo("/dashboard", { state: { data: data && data.data } });
+        navigateTo("/dashboard/home", { state: { data: data && data.data } });
       } else {
         setLoginStatus("error");
       }
@@ -37,10 +37,11 @@ const Login = () => {
       console.log("Error fetching data", err);
     }
   };
+
   return (
     <>
       <div className="login-container">
-        <h2>Sign up or Login</h2>
+        <h2>Login to Expense Tracker</h2>
         <div className="login-input-container">
           <label>Username:</label>
           <input type="text" onChange={e => setUsername(e.target.value)} />
@@ -53,9 +54,14 @@ const Login = () => {
           />
         </div>
         <div className="login-button-container">
-          <button onClick={getUserByName}>Login</button>
-          <Link to="/">
-            <button>Cancel</button>
+          <Link
+            onClick={getUserByName}
+            className="login-route-button login-route-button-size-small"
+          >
+            <span className="login-route-button-description">Login</span>
+          </Link>
+          <Link to="/" className="cancel-button">
+            <span className="cancel-button-description">Cancel</span>
           </Link>
         </div>
       </div>
