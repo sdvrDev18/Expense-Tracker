@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
 import userRoute from "./routes/user-route.js";
-import dataRoute from "./routes/data-route.js";
+import expenseRoute from "./routes/expense-route.js";
 
 const app = express();
 
@@ -22,8 +22,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api", userRoute);
-app.use("/data", dataRoute);
+//Routes
+app.use("/user", userRoute);
+app.use("/expense", expenseRoute);
 
 app.use((error, req, res, next) => {
   if (error) res.status(500).send(error);

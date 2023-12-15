@@ -1,4 +1,3 @@
-import mongodb from "mongodb";
 import { User } from "../models/user-model.js";
 
 export const getUserDetails = async (req, res, next) => {

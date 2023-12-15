@@ -18,7 +18,7 @@ const Login = () => {
   const getUserByName = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/${userName}/${userPassword}`,
+        `http://localhost:5000/user/${userName}/${userPassword}`,
         {
           method: "GET",
           mode: "cors",

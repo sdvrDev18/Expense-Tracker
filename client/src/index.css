@@ -133,7 +133,7 @@ ul {
 }
 
 .login-route-button {
-  overflow: hidden;
+  overflow: clip;
   text-align: center;
   text-decoration: none;
   border-radius: 5px;
@@ -183,7 +183,7 @@ ul {
 }
 
 .signin-route-button {
-  overflow: hidden;
+  overflow: clip;
   font-size: 1em;
   text-align: center;
   text-decoration: none;
@@ -214,7 +214,7 @@ ul {
 }
 
 .cancel-button {
-  overflow: hidden;
+  overflow: clip;
   font-size: 1em;
   text-align: center;
   text-decoration: none;
@@ -238,9 +238,8 @@ ul {
 
 .grid-col-app-wrapper {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(4, 1fr);
-  background: grey;
+  /* gap: 1rem; */
+  grid-template-columns: repeat(5, 1fr);
   height: calc(100vh - 9em);
 }
 
@@ -250,5 +249,9 @@ ul {
 }
 
 .grid-content-container {
-  grid-column: span 3;
+  grid-column: span 4;
+  background: #e8e6eb;
+  padding: 1rem;
+  margin: 0;
+  color: #290a4d;
 }
