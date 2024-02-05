@@ -1,14 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
-
+import dotenv from "dotenv";
 import userRoute from "./routes/user-route.js";
 import expenseRoute from "./routes/expense-route.js";
 
 const app = express();
-
-const url =
-  "mongodb+srv://Sachdev:Thegodfather%400@cluster0.elpqkkf.mongodb.net/Expense-Tracker?retryWrites=true&w=majority";
+dotenv.config();
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -31,9 +29,9 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(url)
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("DB connection success");
-    app.listen(5000);
+    app.listen(process.env.PORT || 8000);
   })
-  .catch(error => console.log("Could not connect to DB"));
+  .catch(error => console.log("Could not connect to DB", error));
