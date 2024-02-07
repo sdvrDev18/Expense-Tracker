@@ -4,11 +4,13 @@ import { User } from "../models/user-model.js";
 export const addExpenseCategory = async (req, res, next) => {
   let result;
   try {
-    result = await Category.findOneAndUpdate(
-      { userId: req.body.userId },
-      { $push: { expenseCategory: req.body.expenseCategory } },
-      { new: true, upsert: true }
-    );
+    console.log("POST category Success!!");
+    result = await User.findById(req.body.userId);
+    result.expenseCategory = [
+      ...result.expenseCategory,
+      ...req.body.expenseCategory
+    ];
+    await result.save();
   } catch (error) {
     console.log("POST category failed!!");
     res.status(404).json({
@@ -28,14 +30,14 @@ export const addExpenseDetails = async (req, res, next) => {
   let result;
 
   const expenseReq = new Expense({
-    userId: req.body.userId,
+    userId: req.body._id,
     expenseCategory: req.body.expenseCategory,
     expenseName: req.body.expenseName,
     expenseDescrption: req.body.expenseDescrption,
     expenseAmount: req.body.expenseAmount
   });
 
-  const checkUserExist = await User.findById(req.body.userId);
+  const checkUserExist = await User.findById(req.body._id);
 
   if (checkUserExist) {
     try {

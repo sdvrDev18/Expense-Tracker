@@ -18,10 +18,13 @@ export const getUserDetails = async (req, res) => {
     if (!isMatch) {
       return res.status(404).json({ message: "Incorrect Password. " });
     }
+
     const jwtToken = jwt.sign(
       { userID: result._id },
-      process.env.JWT_SECRET_TOKEN
+      process.env.JWT_SECRET_TOKEN,
+      { expiresIn: "10m" }
     );
+
     res.status(200).json({ jwtToken: jwtToken, data: result });
     // Here return is not needed as the function is over anyway after this line.
   } catch (error) {

@@ -1,0 +1,18 @@
+1. User Login -- getUserDetails()
+
+GET
+http://localhost:5000/user/Hari/Pass1
+
+
+2. Add Expense Category -- addExpenseCategory()
+
+POST
+http://localhost:5000/expense/category
+{
+    "userId": "65c06347da5ef074e9cfce7b",
+    "expenseCategory": [
+        "Hello",
+        "Hi"
+    ]
+  }
+

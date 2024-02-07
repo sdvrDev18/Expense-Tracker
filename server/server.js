@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoute from "./routes/user-route.js";
 import expenseRoute from "./routes/expense-route.js";
+import { verifyToken } from "./middleware/auth.js";
 
 const app = express();
 dotenv.config();
@@ -22,9 +23,10 @@ app.use((req, res, next) => {
 
 //Routes
 app.use("/user", userRoute);
-app.use("/expense", expenseRoute);
+app.use("/expense", verifyToken, expenseRoute);
 
 app.use((error, req, res, next) => {
+  console.log("GLOBAL ERROR!!");
   if (error) res.status(500).send(error);
 });
 
